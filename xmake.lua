@@ -1,6 +1,8 @@
 set_project("ZXRenderer")
 set_version("1.0.0")
-add_defines("ZXRENDEER_VERSION=\"1.0.0\"")
+add_defines("ZXRENDERER_VERSION=\"1.0.0\"")
+add_defines("ZXRENDERER_WINDOW_NAME=\"ZXRenderer v1.0.0\"")
+add_defines("ZXRENDERER_IDENTIFIER=\"com.zxprism.zxrenderer\"")
 
 add_rules("mode.debug", "mode.release")
 add_repositories("remote-repo https://github.com/ZXPrism/my-xmake-repo.git")
