@@ -26,6 +26,17 @@ WindowsConsoleScreen::WindowsConsoleScreen(uint16_t width, uint16_t height)
 	cursor_info.dwSize = 3;
 	SetConsoleCursorInfo(_FrontBuffer, &cursor_info);
 	SetConsoleCursorInfo(_BackBuffer, &cursor_info);
+
+	_ColorMap = std::string(16, ' ');
+	_ColorMap[0] = ' ';
+	_ColorMap[1] = '.';
+	_ColorMap[2] = ':';
+	_ColorMap[3] = '-';
+	_ColorMap[4] = '=';
+	_ColorMap[5] = '+';
+	_ColorMap[6] = '*';
+	_ColorMap[7] = '#';
+	_ColorMap[8] = '@';
 }
 
 WindowsConsoleScreen::~WindowsConsoleScreen() {
@@ -33,18 +44,16 @@ WindowsConsoleScreen::~WindowsConsoleScreen() {
 }
 
 void WindowsConsoleScreen::WritePixel(uint16_t row, uint16_t col, uint32_t color) {
-	WORD pixel_color = static_cast<WORD>(color);
 	DWORD n_written;
 	COORD write_coord = { static_cast<SHORT>(col), static_cast<SHORT>(row) };
-	WriteConsoleOutputCharacter(_BackBuffer, "*", 1, write_coord, &n_written);
-	WriteConsoleOutputAttribute(_BackBuffer, &pixel_color, 1, write_coord, &n_written);
+	WriteConsoleOutputCharacter(_BackBuffer, &_ColorMap[color], 1, write_coord, &n_written);
 }
 
 uint32_t WindowsConsoleScreen::ReadPixel(uint16_t row, uint16_t col) const {
-	WORD color;
+	char color;
 	DWORD n_read;
 	COORD read_coord = { static_cast<SHORT>(col), static_cast<SHORT>(row) };
-	ReadConsoleOutputAttribute(_BackBuffer, &color, 1, read_coord, &n_read);
+	ReadConsoleOutputCharacter(_BackBuffer, &color, 1, read_coord, &n_read);
 
 	return static_cast<uint32_t>(color);
 }

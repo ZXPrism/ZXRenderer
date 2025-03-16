@@ -4,6 +4,8 @@
 
 #	include <ZXRenderer/Screen.h>
 
+#	include <string>
+
 namespace zxrenderer {
 
 /**
@@ -12,6 +14,7 @@ namespace zxrenderer {
  */
 class WindowsConsoleScreen : public Screen {
 private:
+	std::string _ColorMap;
 	void *_FrontBuffer;
 	void *_BackBuffer;
 
@@ -36,9 +39,11 @@ public:
 	 *
 	 * @param row The vertical offset, in pixels
 	 * @param col The horizontal offset, in pixels
-	 * @param color The color of the pixel, in windows console standard colors
+	 * @param color The color of the pixel, see notes below
 	 *
-	 * @note You can get the list of standard colors using command "color /?"
+	 * @note The legacy console supports a rather limited set of colors,
+	 * so I decide not to use normal colors, instead, use different chars
+	 * to represent the grey levels, see "docs/ConsoleColors.md" for more information
 	 */
 	virtual void WritePixel(uint16_t row, uint16_t col, uint32_t color) override;
 
@@ -47,18 +52,22 @@ public:
 	 *
 	 * @param row The vertical offset, in pixels
 	 * @param col The horizontal offset, in pixels
-	 * @return uint32_t The color of the pixel, in windows console standard colors
+	 * @return uint32_t The color of the pixel, see notes below
 	 *
-	 * @note You can get the list of standard colors using command "color /?"
+	 * @note The legacy console supports a rather limited set of colors,
+	 * so I decide not to use normal colors, instead, use different chars
+	 * to represent the grey levels, see "docs/ConsoleColors.md" for more information
 	 */
 	virtual uint32_t ReadPixel(uint16_t row, uint16_t col) const override;
 
 	/**
 	 * @brief Clears the back buffer with desired color
 	 *
-	 * @param clear_color The clear color, in windows console standard colors
+	 * @param clear_color The clear color, see notes below
 	 *
-	 * @note You can get the list of standard colors using command "color /?"
+	 * @note The legacy console supports a rather limited set of colors,
+	 * so I decide not to use normal colors, instead, use different chars
+	 * to represent the grey levels, see "docs/ConsoleColors.md" for more information
 	 */
 	virtual void Clear(uint32_t clear_color) override;
 
