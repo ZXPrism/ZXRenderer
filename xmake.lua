@@ -33,6 +33,8 @@ function AddTarget_Demo(demo_name)
         add_packages("sol2", "libsdl3", "spdlog")
         add_packages("zxmath")
         add_files("demo/" .. demo_name .. "/**.cpp")
+        add_files("src/ZXRenderer/**.cpp")
+        add_includedirs("src")
         add_includedirs("demo/" .. demo_name .. "/")
 
         after_build(function (target)
@@ -40,3 +42,6 @@ function AddTarget_Demo(demo_name)
         end)
     target_end()
 end
+
+AddTarget_Demo("RandomWalk")
+AddTarget_Demo("LifeGame")
