@@ -7,7 +7,7 @@ Screen::Screen(uint16_t width, uint16_t height)
     , _Height(height) {
 }
 
-std::pair<uint32_t, uint32_t> Screen::GetSize() const {
+std::pair<uint16_t, uint16_t> Screen::GetSize() const {
 	return { _Width, _Height };
 }
 

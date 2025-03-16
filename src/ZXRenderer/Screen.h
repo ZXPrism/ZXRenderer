@@ -36,7 +36,7 @@ public:
 	 *
 	 * @param row The vertical offset, in pixels
 	 * @param col The horizontal offset, in pixels
-	 * @param color The color of the pixel, in R8G8B8A8 format
+	 * @param color The color of the pixel
 	 */
 	virtual void WritePixel(uint16_t row, uint16_t col, uint32_t color) = 0;
 
@@ -45,14 +45,14 @@ public:
 	 *
 	 * @param row The vertical offset, in pixels
 	 * @param col The horizontal offset, in pixels
-	 * @return uint32_t The color of the pixel, in R8G8B8A8 format
+	 * @return uint32_t The color of the pixel
 	 */
 	virtual uint32_t ReadPixel(uint16_t row, uint16_t col) const = 0;
 
 	/**
 	 * @brief Clears the back buffer with desired color
 	 *
-	 * @param clear_color The clear color, in R8G8B8A8 format
+	 * @param clear_color The clear color
 	 */
 	virtual void Clear(uint32_t clear_color) = 0;
 
@@ -66,9 +66,9 @@ public:
 	/**
 	 * @brief Get the size of the screen, in order <width, height>
 	 *
-	 * @return std::pair<uint32_t, uint32_t> The size of the screen, in order <width, height>
+	 * @return std::pair<uint16_t, uint16_t> The size of the screen, in order <width, height>
 	 */
-	std::pair<uint32_t, uint32_t> GetSize() const;
+	std::pair<uint16_t, uint16_t> GetSize() const;
 };
 
 }  // namespace zxrenderer
