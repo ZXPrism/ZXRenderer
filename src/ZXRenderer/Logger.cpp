@@ -1,6 +1,4 @@
-#include "Logger.h"
-
-#include "Settings.h"
+#include <ZXRenderer/Logger.h>
 
 namespace zxrenderer {
 

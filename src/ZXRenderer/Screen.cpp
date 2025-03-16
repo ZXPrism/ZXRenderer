@@ -2,12 +2,12 @@
 
 namespace zxrenderer {
 
-Screen::Screen(size_t width, size_t height)
+Screen::Screen(uint16_t width, uint16_t height)
     : _Width(width)
     , _Height(height) {
 }
 
-std::pair<size_t, size_t> Screen::GetSize() const {
+std::pair<uint32_t, uint32_t> Screen::GetSize() const {
 	return { _Width, _Height };
 }
 

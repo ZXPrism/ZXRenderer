@@ -8,16 +8,63 @@ namespace zxrenderer {
 
 /**
  * @brief Represents a screen on desktop OSs, e.g. Windows, Linux and Mac OS
+ *
  * @details Its main functionality relies on SDL3. This class will firstly
  * inits SDL3, then creates a window and retrieves the surface of it as the framebuffer
  */
 class DesktopScreen : public Screen {
-public:
-	DesktopScreen(size_t width, size_t height);
-
 private:
-	SDL_Window *_SDLWindow;      // window context
-	SDL_Renderer *_SDLRenderer;  // only for debugging, like displaying the debug texts
+	SDL_Window *_SDLWindow;
+	SDL_Surface *_WindowSurface;
+	const SDL_PixelFormatDetails *_WindowSurfaceFormat;
+
+public:
+	/**
+	 * @brief Constructs a new DesktopScreen object with initial size
+	 *
+	 * @param width The width of the screen
+	 * @param height The height of the screen
+	 */
+	DesktopScreen(uint16_t width, uint16_t height);
+
+	/**
+	 * @brief Destroys the DesktopScreen object
+	 *
+	 * @details Frees all SDL3 resources
+	 */
+	~DesktopScreen();
+
+	/**
+	 * @brief Writes color to the target pixel
+	 *
+	 * @param row The vertical offset, in pixels
+	 * @param col The horizontal offset, in pixels
+	 * @param color The color of the pixel, in R8G8B8A8 format
+	 */
+	virtual void WritePixel(uint16_t row, uint16_t col, uint32_t color) override;
+
+	/**
+	 * @brief Reads color from the target pixel
+	 *
+	 * @param row The vertical offset, in pixels
+	 * @param col The horizontal offset, in pixels
+	 * @return uint32_t The color of the pixel, in R8G8B8A8 format
+	 */
+	virtual uint32_t ReadPixel(uint16_t row, uint16_t col) const override;
+
+	/**
+	 * @brief Clears the back buffer with desired color
+	 *
+	 * @param clear_color The clear color, in R8G8B8A8 format
+	 */
+	virtual void Clear(uint32_t clear_color) override;
+
+	/**
+	 * @brief Presents the image on the back buffer to the screen
+	 *
+	 * @note This opeation is often called "swap buffers"
+	 */
+	virtual void Present() override;
 };
 
 }  // namespace zxrenderer
