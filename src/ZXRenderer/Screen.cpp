@@ -1,4 +1,4 @@
-#include "Screen.h"
+#include <ZXRenderer/Screen.h>
 
 namespace zxrenderer {
 
