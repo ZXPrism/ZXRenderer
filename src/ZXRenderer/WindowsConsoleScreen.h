@@ -77,6 +77,33 @@ public:
 	 * @note This opeation is often called "swap buffers"
 	 */
 	virtual void Present() override;
+
+private:
+	/**
+	 * @brief Inits the framebuffer
+	 *
+	 * @param n_color_comp The number of color components
+	 *
+	 * @note Whether to use double buffering is up to the implementation
+	 * We only ensure that one screen must have at least one buffer
+	 */
+	virtual void _InitFrameBuffer(uint8_t n_color_comp) override;
+
+	/**
+	 * @brief Maps an integer color into normalized form ([0, 1])
+	 *
+	 * @param color The input color
+	 * @return float The normalized color
+	 */
+	float _MapColor(uint32_t color) const;
+
+	/**
+	 * @brief Maps a normalized color back into its interger form
+	 *
+	 * @param color The normalized color
+	 * @return uint32_t The integer color
+	 */
+	uint32_t _MapColorInv(float color) const;
 };
 
 }  // namespace zxrenderer

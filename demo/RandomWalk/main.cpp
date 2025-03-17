@@ -2,15 +2,13 @@
 
 #include <ZXRenderer/DesktopScreen.h>
 
-#include <chrono>
 #include <memory>
 #include <random>
-#include <thread>
 
 int main(int argc, char *argv[]) {
 	auto screen = std::make_unique<zxrenderer::DesktopScreen>(512, 512);
 	auto [width, height] = screen->GetSize();
-	screen->Clear(0xffffffff);
+	screen->Clear(0x00ffffff);
 
 	std::mt19937_64 engine;
 	std::random_device rd;
@@ -38,17 +36,15 @@ int main(int argc, char *argv[]) {
 			}
 		}
 
-		screen->WritePixel(y, x, 0x0000ffff);
+		screen->WritePixel(y, x, 0x00ff0000);
 		int nx = 0, ny = 0;
 		do {
 			int dir = dist(engine);
 			nx = x + dx[dir], ny = y + dy[dir];
-		} while (!(nx >= 0 && nx < width && ny >= 0 && ny < height));
+		} while (!(nx >= 0 && nx < static_cast<int>(width) && ny >= 0 && ny < static_cast<int>(height)));
 		x = nx, y = ny;
 
 		screen->Present();
-
-		// std::this_thread::sleep_for(std::chrono::milliseconds(16));
 	}
 
 	return 0;

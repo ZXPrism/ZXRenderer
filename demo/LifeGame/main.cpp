@@ -41,7 +41,7 @@ int main(int argc, char *argv[]) {
 					for (int j = -1; j <= 1; j++) {
 						int nrow = static_cast<int>(row) + i;
 						int ncol = static_cast<int>(col) + j;
-						if (nrow >= 0 && nrow < height && ncol >= 0 && ncol < width) {
+						if (nrow >= 0 && nrow < static_cast<int>(height) && ncol >= 0 && ncol < static_cast<int>(width)) {
 							alive_cnt += cells_prev[nrow][ncol];
 						}
 					}
