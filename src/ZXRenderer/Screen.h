@@ -1,6 +1,9 @@
 #pragma once
 
+#include <ZXRenderer/RenderTarget.h>
+
 #include <cstdint>
+#include <memory>
 #include <utility>
 
 namespace zxrenderer {
@@ -14,16 +17,30 @@ namespace zxrenderer {
  */
 class Screen {
 protected:
-	uint16_t _Width, _Height;  // screen size
+	uint32_t _Width, _Height;  // screen size
+	std::shared_ptr<RenderTarget> _FrameBuffer;
+
+protected:
+	/**
+	 * @brief Inits the framebuffer
+	 *
+	 * @param n_color_comp The number of color components
+	 *
+	 * @note Whether to use double buffering is up to the implementation
+	 * We only ensure that one screen must have at least one buffer
+	 */
+	virtual void _InitFrameBuffer(uint8_t n_color_comp) = 0;
 
 public:
 	/**
 	 * @brief Constructs a new Screen object with initial size
 	 *
+	 * Create a render target with a color attachment, in RGB format
+	 *
 	 * @param width The width of the screen
 	 * @param height The height of the screen
 	 */
-	Screen(uint16_t width, uint16_t height);
+	Screen(uint32_t width, uint32_t height);
 
 	/**
 	 * @brief Destroys the Screen object
@@ -66,9 +83,15 @@ public:
 	/**
 	 * @brief Get the size of the screen, in order <width, height>
 	 *
-	 * @return std::pair<uint16_t, uint16_t> The size of the screen, in order <width, height>
+	 * @return std::pair<uint32_t, uint32_t> The size of the screen, in order <width, height>
 	 */
-	std::pair<uint16_t, uint16_t> GetSize() const;
+	std::pair<uint32_t, uint32_t> GetSize() const;
+
+	/**
+	 * @brief Get the pointer to the screen's render target (back buffer)
+	 *
+	 */
+	std::shared_ptr<RenderTarget> GetRenderTarget();
 };
 
 }  // namespace zxrenderer
