@@ -2,6 +2,4 @@
 
 namespace zxrenderer {
 
-;
-
 }  // namespace zxrenderer

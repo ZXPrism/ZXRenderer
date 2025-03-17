@@ -1,3 +1,4 @@
+#include <ZXRenderer/Logger.h>
 #include <ZXRenderer/RenderTarget.h>
 
 #include <cstring>
@@ -37,6 +38,10 @@ void RenderTarget::Clear(AttachmentType attachment_type, float *src) {
 	for (size_t i = 0; i < n_data; i += step) {
 		std::memcpy(&data[i], src, step * sizeof(float));
 	}
+}
+
+std::pair<uint32_t, uint32_t> RenderTarget::GetExtent() const {
+	return { _Width, _Height };
 }
 
 }  // namespace zxrenderer

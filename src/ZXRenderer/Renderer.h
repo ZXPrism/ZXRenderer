@@ -1,9 +1,13 @@
 #pragma once
 
 #include <ZXRenderer/Pipeline.h>
+#include <ZXRenderer/RenderCommand.h>
 #include <ZXRenderer/RenderTarget.h>
 #include <ZXRenderer/UniformBuffer.h>
 #include <ZXRenderer/VertexBuffer.h>
+
+#include <memory>
+#include <vector>
 
 namespace zxrenderer {
 
@@ -13,6 +17,14 @@ namespace zxrenderer {
  */
 class Renderer {
 private:
+	std::vector<RenderCommand> _CommandQueue;
+
+	// ONLY FOR TEST!
+	std::shared_ptr<VertexBuffer> vertex_buffer;
+	std::shared_ptr<UniformBuffer> uniform_buffer;
+	std::shared_ptr<RenderTarget> render_target;
+	std::shared_ptr<Pipeline> pipeline;
+
 public:
 	/**
 	 * @brief Begin a rendering procedure and start recording the rendering commands
@@ -91,6 +103,11 @@ public:
 	void EndRender();
 
 private:
+	/**
+	 * @brief Only for test! I will disappear one day :) don't miss me!
+	 *
+	 */
+	void _ExecDrawCall();
 };
 
 }  // namespace zxrenderer

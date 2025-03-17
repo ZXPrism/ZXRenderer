@@ -1,5 +1,7 @@
 #pragma once
 
+#include <ZXRenderer/PayloadObject.h>
+
 #include <array>
 #include <cstdint>
 #include <vector>
@@ -20,7 +22,9 @@ enum class AttachmentType : uint8_t {
  *
  * For simplicity, only 4 attachments are allowed.
  */
-class RenderTarget {
+class RenderTarget : public PayloadObject {
+	friend class Renderer;
+
 private:
 	std::array<std::vector<float>, 4> _Attachments;
 	std::array<uint8_t, 3> _StepFloats;
@@ -76,6 +80,13 @@ public:
 	 * @param src The clear value
 	 */
 	void Clear(AttachmentType attachment_type, float *src);
+
+	/**
+	 * @brief Get the extent of the render target buffer, in order <width, height>
+	 *
+	 * @return std::pair<uint32_t, uint32_t> The extent of the render target buffer, in order <width, height>
+	 */
+	std::pair<uint32_t, uint32_t> GetExtent() const;
 };
 
 }  // namespace zxrenderer

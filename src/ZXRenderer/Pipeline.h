@@ -1,10 +1,6 @@
 #pragma once
 
-#include <ZXRenderer/PrimitiveType.h>
-#include <ZXRenderer/Shader.h>
-
-#include <memory>
-#include <optional>
+#include <ZXRenderer/PayloadObject.h>
 
 namespace zxrenderer {
 
@@ -12,7 +8,7 @@ namespace zxrenderer {
  * @brief Represents a rendering pipeline
  *
  */
-class Pipeline {
+class Pipeline : public PayloadObject {
 protected:
 public:
 	/**
