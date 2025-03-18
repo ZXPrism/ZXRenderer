@@ -57,7 +57,6 @@ public:
 		} else if constexpr (std::is_same_v<T, ShaderDataType::vec4>) {
 			return _OutputVec4[name];
 		}
-		return {};
 	}
 
 	template<typename T>

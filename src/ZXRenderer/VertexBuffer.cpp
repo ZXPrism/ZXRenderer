@@ -21,7 +21,7 @@ void VertexBuffer::BindAttribute(VertexBindingPoint binding_point,
 
 float *VertexBuffer::GetVertexAttribute(VertexBindingPoint binding_point, size_t vertex_id) {
 	auto bp = static_cast<uint8_t>(binding_point);
-	return &_VertexData[_VertexIndex[vertex_id] * _StepFloats] + _BindingPoints[bp].first;
+	return &_VertexData[_VertexIndex[vertex_id] * _StepFloats + _BindingPoints[bp].first];
 }
 
 }  // namespace zxrenderer

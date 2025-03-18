@@ -35,6 +35,7 @@ DesktopScreen::~DesktopScreen() {
 void DesktopScreen::_InitFrameBuffer(uint8_t n_color_comp) {
 	_FrameBuffer = std::make_shared<RenderTarget>(_Width, _Height);
 	_FrameBuffer->AddAttachment(AttachmentType::COLOR, n_color_comp);
+	_FrameBuffer->AddAttachment(AttachmentType::DEPTH, 1);
 }
 
 void DesktopScreen::WritePixel(uint16_t row, uint16_t col, uint32_t color) {
@@ -53,6 +54,9 @@ void DesktopScreen::Clear(uint32_t clear_color) {
 	float color_vec[3];
 	RGB24ToColorVec(clear_color, color_vec);
 	_FrameBuffer->Clear(AttachmentType::COLOR, color_vec);
+
+	constexpr float clear_depth = -std::numeric_limits<float>::max();
+	_FrameBuffer->Clear(AttachmentType::DEPTH, &clear_depth);
 }
 
 void DesktopScreen::Present() {

@@ -79,7 +79,7 @@ public:
 	 * @param attachment_type The target attachment
 	 * @param src The clear value
 	 */
-	void Clear(AttachmentType attachment_type, float *src);
+	void Clear(AttachmentType attachment_type, const float *src);
 
 	/**
 	 * @brief Get the extent of the render target buffer, in order <width, height>

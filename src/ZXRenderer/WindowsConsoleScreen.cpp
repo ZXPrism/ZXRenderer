@@ -48,6 +48,7 @@ WindowsConsoleScreen::~WindowsConsoleScreen() {
 void WindowsConsoleScreen::_InitFrameBuffer(uint8_t n_color_comp) {
 	_FrameBuffer = std::make_shared<RenderTarget>(_Width, _Height);
 	_FrameBuffer->AddAttachment(AttachmentType::COLOR, n_color_comp);
+	_FrameBuffer->AddAttachment(AttachmentType::DEPTH, 1);
 }
 
 void WindowsConsoleScreen::WritePixel(uint16_t row, uint16_t col, uint32_t color) {
@@ -64,6 +65,9 @@ uint32_t WindowsConsoleScreen::ReadPixel(uint16_t row, uint16_t col) const {
 void WindowsConsoleScreen::Clear(uint32_t clear_color) {
 	float norm_color = _MapColor(clear_color);
 	_FrameBuffer->Clear(AttachmentType::COLOR, &norm_color);
+
+	constexpr float clear_depth = -std::numeric_limits<float>::max();
+	_FrameBuffer->Clear(AttachmentType::DEPTH, &clear_depth);
 }
 
 void WindowsConsoleScreen::Present() {

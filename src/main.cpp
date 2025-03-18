@@ -25,19 +25,9 @@ int main(int argc, char *argv[]) {
 
 	std::vector<float> vertices{
 		// Triangle 1
-		-0.8f, 0.6f, 0.0f,
-		0.0f, 0.9f, 0.0f,
-		-0.4f, 0.2f, 0.0f,
-
-		// Triangle 2
-		0.2f, -0.1f, 0.0f,
-		0.8f, -0.3f, 0.0f,
-		0.5f, 0.4f, 0.0f,
-
-		// Triangle 3
-		-0.7f, -0.5f, 0.0f,
-		-0.2f, -0.7f, 0.0f,
-		0.1f, -0.2f, 0.0f
+		-0.5f, -0.5f, 0.0f, 1.0f, 0.0f, 0.0f,
+		0.5f, -0.5f, 0.0f, 0.0f, 1.0f, 0.0f,
+		0.0f, 0.5f, 0.0f, 0.0f, 0.0f, 1.0f
 	};
 	std::vector<size_t> indices{
 		0, 1, 2,
@@ -45,8 +35,9 @@ int main(int argc, char *argv[]) {
 		6, 7, 8
 	};
 
-	auto vertex_buffer = std::make_shared<VertexBuffer>(vertices, indices, 3);
+	auto vertex_buffer = std::make_shared<VertexBuffer>(vertices, indices, 6);
 	vertex_buffer->BindAttribute(VertexBindingPoint::_0, 0, 3);
+	vertex_buffer->BindAttribute(VertexBindingPoint::_1, 3, 3);
 
 	auto uniform_buffer = std::make_shared<UniformBuffer>();
 

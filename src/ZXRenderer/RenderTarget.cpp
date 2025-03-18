@@ -28,7 +28,7 @@ void RenderTarget::ReadPixel(AttachmentType attachment_type, uint16_t row, uint1
 	std::memcpy(dest, &_Attachments[type][(row * _Width + col) * step], step * sizeof(float));
 }
 
-void RenderTarget::Clear(AttachmentType attachment_type, float *src) {
+void RenderTarget::Clear(AttachmentType attachment_type, const float *src) {
 	uint8_t type = static_cast<uint8_t>(attachment_type);
 	uint8_t step = _StepFloats[type];
 
