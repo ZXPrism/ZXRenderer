@@ -16,13 +16,13 @@ void RenderTarget::AddAttachment(AttachmentType attachment_type, uint8_t step_fl
 	_StepFloats[type] = step_floats;
 }
 
-void RenderTarget::WritePixel(AttachmentType attachment_type, uint16_t row, uint16_t col, float *src) {
+void RenderTarget::WritePixel(AttachmentType attachment_type, uint16_t row, uint16_t col, const float *src) {
 	uint8_t type = static_cast<uint8_t>(attachment_type);
 	uint8_t step = _StepFloats[type];
 	std::memcpy(&_Attachments[type][(row * _Width + col) * step], src, step * sizeof(float));
 }
 
-void RenderTarget::ReadPixel(AttachmentType attachment_type, uint16_t row, uint16_t col, float *dest) {
+void RenderTarget::ReadPixel(AttachmentType attachment_type, uint16_t row, uint16_t col, float *dest) const {
 	uint8_t type = static_cast<uint8_t>(attachment_type);
 	uint8_t step = _StepFloats[type];
 	std::memcpy(dest, &_Attachments[type][(row * _Width + col) * step], step * sizeof(float));

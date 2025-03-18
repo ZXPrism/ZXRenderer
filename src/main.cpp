@@ -7,6 +7,10 @@
 #include <ZXRenderer/VertexBuffer.h>
 #include <ZXRenderer/WindowsConsoleScreen.h>
 
+#include <shaders/TriangleShader.h>
+
+#include <ZXMath/ZXMath.h>
+
 #include <chrono>
 #include <memory>
 #include <random>
@@ -20,17 +24,37 @@ int main(int argc, char *argv[]) {
 	// WindowsConsoleScreen screen{ 128, 32 };
 
 	std::vector<float> vertices{
-		0.0f, 0.5f, 0.0f,
-		-0.5f, -0.5f, 0.0f,
-		0.5f, -0.5f, 0.0f
+		// Triangle 1
+		-0.8f, 0.6f, 0.0f,
+		0.0f, 0.9f, 0.0f,
+		-0.4f, 0.2f, 0.0f,
+
+		// Triangle 2
+		0.2f, -0.1f, 0.0f,
+		0.8f, -0.3f, 0.0f,
+		0.5f, 0.4f, 0.0f,
+
+		// Triangle 3
+		-0.7f, -0.5f, 0.0f,
+		-0.2f, -0.7f, 0.0f,
+		0.1f, -0.2f, 0.0f
 	};
-	auto vertex_buffer = std::make_shared<VertexBuffer>(vertices, 3);
+	std::vector<size_t> indices{
+		0, 1, 2,
+		3, 4, 5,
+		6, 7, 8
+	};
+
+	auto vertex_buffer = std::make_shared<VertexBuffer>(vertices, indices, 3);
 	vertex_buffer->BindAttribute(VertexBindingPoint::_0, 0, 3);
+
+	auto uniform_buffer = std::make_shared<UniformBuffer>();
+
+	auto shader = std::make_shared<TriangleShader>();
 
 	auto pipeline = std::make_shared<RasterizationPipeline>();
 	pipeline->SetPrimitiveType(PrimitiveType::TRIANGLE_LIST);
-
-	auto uniform_buffer = std::make_shared<UniformBuffer>();
+	pipeline->SetShader(shader);
 
 	bool running = true;
 	while (running) {

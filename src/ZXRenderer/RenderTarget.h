@@ -56,7 +56,7 @@ public:
 	 *
 	 * @note No bounds checking
 	 */
-	void WritePixel(AttachmentType attachment_type, uint16_t row, uint16_t col, float *src);
+	void WritePixel(AttachmentType attachment_type, uint16_t row, uint16_t col, const float *src);
 
 	/**
 	 * @brief Reads data from the target pixel
@@ -71,7 +71,7 @@ public:
 	 *
 	 * @note No bounds checking
 	 */
-	void ReadPixel(AttachmentType attachment_type, uint16_t row, uint16_t col, float *dest);
+	void ReadPixel(AttachmentType attachment_type, uint16_t row, uint16_t col, float *dest) const;
 
 	/**
 	 * @brief Clear the target attachment

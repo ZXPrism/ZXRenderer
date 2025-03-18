@@ -16,6 +16,8 @@ namespace zxrenderer {
  *
  */
 class Renderer {
+	friend class Shader;
+
 private:
 	std::vector<RenderCommand> _CommandQueue;
 
@@ -26,6 +28,12 @@ private:
 	std::shared_ptr<Pipeline> pipeline;
 
 public:
+	/**
+	 * @brief (TODO)
+	 *
+	 */
+	Renderer();
+
 	/**
 	 * @brief Begin a rendering procedure and start recording the rendering commands
 	 *
@@ -107,7 +115,31 @@ private:
 	 * @brief Only for test! I will disappear one day :) don't miss me!
 	 *
 	 */
-	void _ExecDrawCall();
+	void _ExecDrawCall(size_t offset_vertices, size_t n_vertices);
+
+	/**
+	 * @brief Only for test! I will disappear one day :) don't miss me!
+	 *
+	 */
+	void _Layout();
+
+	/**
+	 * @brief Only for test! I will disappear one day :) don't miss me!
+	 *
+	 */
+	void _Uniform();
+
+	/**
+	 * @brief Only for test! I will disappear one day :) don't miss me!
+	 *
+	 */
+	void _Input();
+
+	/**
+	 * @brief Only for test! I will disappear one day :) don't miss me!
+	 *
+	 */
+	void _Output();
 };
 
 }  // namespace zxrenderer

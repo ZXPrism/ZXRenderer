@@ -6,7 +6,7 @@ add_defines("ZXRENDERER_IDENTIFIER=\"com.zxprism.zxrenderer\"")
 
 add_rules("mode.debug", "mode.release")
 add_repositories("remote-repo https://github.com/ZXPrism/my-xmake-repo.git")
-add_requires("sol2", "libsdl3", "spdlog")
+add_requires("libsdl3", "spdlog")
 add_requires("zxmath")
 
 target("ZXRenderer")
@@ -14,10 +14,14 @@ target("ZXRenderer")
     set_kind("binary")
     set_warnings("all", "error")
 
-    add_packages("sol2", "libsdl3", "spdlog")
+    add_packages("libsdl3", "spdlog")
     add_packages("zxmath")
+
     add_files("src/**.cpp")
+    add_files("shaders/**.cpp")
+
     add_includedirs("src")
+    add_includedirs(".")
 
     after_build(function (target)
         os.cp(target:targetfile(), "bin/")
@@ -30,12 +34,17 @@ function AddTarget_Demo(demo_name)
         set_kind("binary")
         set_warnings("all", "error")
 
-        add_packages("sol2", "libsdl3", "spdlog")
+        add_packages("libsdl3", "spdlog")
         add_packages("zxmath")
+
         add_files("demo/" .. demo_name .. "/**.cpp")
         add_files("src/ZXRenderer/**.cpp")
+        add_files("shaders/**.cpp")
+        
+
         add_includedirs("src")
         add_includedirs("demo/" .. demo_name .. "/")
+        add_includedirs(".")
 
         after_build(function (target)
             os.cp(target:targetfile(), "bin/" .. "demo/" .. demo_name .. "/")

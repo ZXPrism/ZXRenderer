@@ -2,16 +2,16 @@
 
 namespace zxrenderer {
 
+RasterizationPipeline::RasterizationPipeline() {
+	_Type = PipelineType::RASTERIZATION;
+}
+
 bool RasterizationPipeline::IsComplete() const {
-	return _VertexShader && _FragmentShader && _PrimitiveType.has_value();
+	return _Shader && _PrimitiveType.has_value();
 }
 
-void RasterizationPipeline::SetVertexShader(std::shared_ptr<Shader> vertex_shader) {
-	_VertexShader = vertex_shader;
-}
-
-void RasterizationPipeline::SetFragmentShader(std::shared_ptr<Shader> fragment_shader) {
-	_FragmentShader = fragment_shader;
+void RasterizationPipeline::SetShader(std::shared_ptr<Shader> shader) {
+	_Shader = shader;
 }
 
 void RasterizationPipeline::SetPrimitiveType(PrimitiveType primitive_type) {
